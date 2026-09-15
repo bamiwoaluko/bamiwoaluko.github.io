@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oluwabamiwo Aluko — Data &amp; ML</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFFFFF;
+    --bg-soft: #F4F5FC;
+    --ink: #12132A;
+    --ink-dim: #5B5E78;
+    --blue: #2F5AF0;
+    --purple: #7C3AED;
+    --grad: linear-gradient(90deg, var(--blue), var(--purple));
+    --rule: rgba(18,19,42,0.10);
+    --serif: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --maxw: 880px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--serif);
+    line-height:1.55;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    padding:26px 0;
+    border-bottom:1px solid var(--rule);
+    position:sticky;
+    top:0;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(8px);
+    z-index:10;
+  }
+  nav .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .nav-name{
+    font-family:var(--mono);
+    font-size:14px;
+    letter-spacing:0.02em;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .nav-links{
+    display:flex;
+    gap:24px;
+    list-style:none;
+    font-size:14px;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--ink-dim);
+    transition:color .15s ease;
+  }
+  .nav-links a:hover{color:var(--blue);}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:88px 0 96px;
+    border-bottom:1px solid var(--rule);
+    background:
+      radial-gradient(600px 300px at 85% -10%, rgba(124,58,237,0.10), transparent 70%),
+      radial-gradient(500px 260px at 10% 0%, rgba(47,90,240,0.08), transparent 70%);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:40px;
+    align-items:end;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--purple);
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+    display:block;
+  }
+  h1{
+    font-size:clamp(2.4rem, 5vw, 3.4rem);
+    font-weight:800;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .hero-role{
+    margin-top:18px;
+    font-size:1.15rem;
+    color:var(--ink-dim);
+    max-width:46ch;
+  }
+  .hero-role strong{
+    color:var(--ink);
+    font-weight:600;
+    background:linear-gradient(90deg, rgba(47,90,240,0.14), rgba(124,58,237,0.14));
+    padding:0 3px;
+    border-radius:3px;
+  }
+
+  .hero-meta{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--blue);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    text-align:right;
+    align-items:flex-end;
+  }
+  .hero-meta span{color:var(--ink-dim);}
+
+  .spark{
+    width:100%;
+    max-width:220px;
+    margin-top:14px;
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{
+    padding:64px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:36px;
+    gap:16px;
+  }
+  .section-head h2{
+    font-size:1.5rem;
+    font-weight:800;
+  }
+  .section-num{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-dim);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about p{
+    max-width:64ch;
+    color:var(--ink-dim);
+    font-size:1.02rem;
+  }
+  .about p + p{margin-top:14px;}
+  .about strong{color:var(--ink); font-weight:600;}
+
+  /* ---------- PROJECTS ---------- */
+  .project{
+    padding:32px;
+    margin:24px 0;
+    border:1px solid var(--rule);
+    border-radius:14px;
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    position:relative;
+  }
+  a.project:hover{
+    border-color:var(--blue);
+    box-shadow:0 10px 30px -12px rgba(47,90,240,0.25);
+    transform:translateY(-2px);
+  }
+  .project.not-linked{
+    cursor:default;
+  }
+  .project-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .project-title{
+    font-size:1.4rem;
+    font-weight:700;
+  }
+  a.project .project-title{
+    background:var(--grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .project-when{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--purple);
+    white-space:nowrap;
+    padding-top:6px;
+  }
+  .project-summary{
+    margin-top:10px;
+    color:var(--ink-dim);
+    max-width:60ch;
+  }
+
+  .stat-row{
+    display:flex;
+    gap:36px;
+    flex-wrap:wrap;
+    margin:26px 0;
+  }
+  .stat{
+    min-width:120px;
+  }
+  .stat-num{
+    font-family:var(--mono);
+    font-size:1.6rem;
+    color:var(--blue);
+    font-weight:700;
+  }
+  .stat-label{
+    font-size:12.5px;
+    color:var(--ink-dim);
+    margin-top:4px;
+  }
+
+  .project-detail{
+    color:var(--ink-dim);
+    max-width:62ch;
+  }
+  .project-detail + .project-detail{margin-top:10px;}
+  .project-detail strong{color:var(--ink); font-weight:600;}
+
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:22px;
+  }
+  .tag{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-dim);
+    border:1px solid var(--rule);
+    background:var(--bg-soft);
+    padding:5px 10px;
+    border-radius:3px;
+  }
+
+  .project-cta{
+    margin-top:24px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    font-weight:600;
+  }
+  a.project .project-cta{color:var(--blue);}
+  .project-cta .arrow{transition:transform .18s ease;}
+  a.project:hover .project-cta .arrow{transform:translateX(4px);}
+  .placeholder-note{
+    margin-top:24px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-dim);
+    font-style:italic;
+  }
+
+  /* ---------- MINI PROJECTS ---------- */
+  .mini-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .mini-card{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    padding:22px;
+    border:1px solid var(--rule);
+    border-radius:12px;
+    transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  .mini-card:hover{
+    border-color:var(--purple);
+    box-shadow:0 8px 24px -14px rgba(124,58,237,0.30);
+    transform:translateY(-2px);
+  }
+  .mini-title{
+    font-size:1.05rem;
+    font-weight:700;
+  }
+  .mini-when{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--purple);
+    display:block;
+    margin-top:4px;
+  }
+  .mini-desc{
+    margin-top:10px;
+    font-size:14px;
+    color:var(--ink-dim);
+  }
+  .mini-cta{
+    margin-top:14px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--blue);
+  }
+  @media (max-width:640px){
+    .mini-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:28px 40px;
+  }
+  .skill-group h3{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--purple);
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .skill-list{
+    color:var(--ink-dim);
+    font-size:15px;
+    line-height:1.7;
+  }
+
+  /* ---------- CONTACT ---------- */
+  footer{
+    padding:64px 0 56px;
+  }
+  footer h2{
+    font-size:1.7rem;
+    font-weight:800;
+    max-width:20ch;
+  }
+  .contact-links{
+    margin-top:28px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .contact-links a{
+    text-decoration:none;
+    font-family:var(--mono);
+    font-size:15px;
+    color:var(--ink-dim);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    width:fit-content;
+    border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .contact-links a:hover{
+    color:var(--blue);
+    border-color:var(--blue);
+  }
+  .foot-note{
+    margin-top:48px;
+    font-size:12.5px;
+    color:var(--ink-dim);
+    opacity:0.7;
+  }
+
+  @media (max-width:640px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-meta{text-align:left; align-items:flex-start;}
+    .skills-grid{grid-template-columns:1fr;}
+    section{padding:48px 0;}
+    header.hero{padding:56px 0 64px;}
+    .project{padding:24px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-name">OLUWABAMIWO ALUKO</span>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#dataviz">Data Viz</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Data &amp; Machine Learning</span>
+      <h1>Oluwabamiwo Aluko</h1>
+      <p class="hero-role">A data &amp; ML practitioner working across <strong>deep learning research</strong> and <strong>data engineering</strong> — from medical imaging pipelines to economic time-series analysis.</p>
+    </div>
+    <div class="hero-meta">
+      <span>Based in Nigeria</span>
+      <span>Computer Science, B.Sc.</span>
+      <svg class="spark" viewBox="0 0 220 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="sparkGrad" x1="0" y1="0" x2="220" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#2F5AF0"/>
+            <stop offset="1" stop-color="#7C3AED"/>
+          </linearGradient>
+        </defs>
+        <polyline points="0,34 20,30 40,32 60,18 80,22 100,10 120,14 140,6 160,12 180,4 200,8 220,2"
+          stroke="url(#sparkGrad)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>About</h2>
+      <span class="section-num">01</span>
+    </div>
+    <p>I build systems that turn raw, messy data into something a person can actually act on — whether that's a clinical decision-support tool or a chart that explains why prices moved. My dissertation work sits at the intersection of computer vision and fairness: making sure a diagnostic model performs as well on all skin tones as it does on the ones best represented in its training data.</p>
+    <p>I work across the full data stack — <strong>Python, SQL, cloud pipelines, and visualization tools</strong> — to get information from source to something people can use in a meeting.</p>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <span class="section-num">02</span>
+    </div>
+
+    <div class="project not-linked">
+      <div class="project-top">
+        <div class="project-title">Diabetic Foot Ulcer Detection &amp; Wagner Grade Classification</div>
+        <div class="project-when">Undergraduate Dissertation · 2026</div>
+      </div>
+      <p class="project-summary">A two-stage deep learning pipeline that detects diabetic foot ulcers and classifies their severity — built with an explicit focus on reducing bias across skin tones, a gap in most clinical imaging models.</p>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">2-stage</div>
+          <div class="stat-label">YOLOv8 detection → ResNet50 classification</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~19.9k</div>
+          <div class="stat-label">images across Wagner Grades 1–4</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">datasets combined &amp; cleaned</div>
+        </div>
+      </div>
+
+      <p class="project-detail"><strong>Detection.</strong> A YOLOv8 model trained on a Roboflow foot-ulcer dataset localizes the wound region in an input image.</p>
+      <p class="project-detail"><strong>Classification.</strong> A ResNet50 model, trained on a combined Kaggle + SIKAD dataset, assigns a Wagner severity grade to the detected region.</p>
+      <p class="project-detail"><strong>Bias mitigation.</strong> Used CIELAB-based preprocessing and synthetic skin-darkening augmentation to run a dedicated ablation study on how the model's accuracy holds up across skin tones — reframed mid-project from a confirmatory check into a genuine investigative study once early results raised real questions.</p>
+      <p class="project-detail"><strong>Explainability.</strong> Grad-CAM++ visualizations show which regions of an image drove each classification, and the full pipeline is wrapped in a Streamlit app for interactive use.</p>
+      <p class="project-detail"><strong>Data integrity.</strong> Partway through, discovered rotation-invariant near-duplicate images leaking across train/test splits — rebuilt the dataset split to be cluster-safe and retrained both models on the corrected data.</p>
+
+      <div class="tag-row">
+        <span class="tag">YOLOv8</span>
+        <span class="tag">ResNet50</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Grad-CAM++</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">Fairness / Bias Mitigation</span>
+      </div>
+
+      <div class="placeholder-note">Code + write-up coming to GitHub soon</div>
+    </div>
+
+    <a class="project" href="https://github.com/bamiwoaluko" target="_blank" rel="noopener">
+      <div class="project-top">
+        <div class="project-title">Nigeria Inflation Rate Analysis (2008–2024)</div>
+        <div class="project-when">August 2024</div>
+      </div>
+      <p class="project-summary">An end-to-end analysis of sixteen years of Nigerian inflation data, tracing the relationship between inflation and crude oil prices and translating the findings into insights for a non-technical audience.</p>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">16 yrs</div>
+          <div class="stat-label">of inflation data cleaned &amp; analyzed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">tools: Excel, PostgreSQL, Python</div>
+        </div>
+      </div>
+
+      <p class="project-detail">Cleaned and structured the raw dataset using Excel and PostgreSQL, then moved to Python for deeper analysis — identifying trends and the key economic drivers behind them.</p>
+      <p class="project-detail">Applied correlation and regression analysis to quantify the relationship between inflation and crude oil prices, going beyond a surface-level trend read.</p>
+      <p class="project-detail">Visualized results with Matplotlib and Seaborn and presented findings to peers, translating statistical output into a clear economic narrative.</p>
+
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Regression Analysis</span>
+        <span class="tag">Matplotlib / Seaborn</span>
+        <span class="tag">Excel</span>
+      </div>
+
+      <div class="project-cta">View on GitHub <span class="arrow">→</span></div>
+    </a>
+
+  </div>
+</section>
+
+<section id="dataviz">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Data visualizations</h2>
+      <span class="section-num">03</span>
+    </div>
+    <div class="mini-grid">
+      <a class="mini-card" href="https://public.tableau.com/app/profile/oluwabamiwo.aluko/viz/AirBnBProject_17414820025660/Dashboard1" target="_blank" rel="noopener">
+        <div class="mini-title">Airbnb Seattle Dashboard</div>
+        <span class="mini-when">Tableau</span>
+        <p class="mini-desc">Interactive dashboard exploring Seattle Airbnb listings — average price by bedroom count, price distribution across zip codes on a map, and weekly revenue trends over a year.</p>
+        <div class="mini-cta">View on Tableau Public →</div>
+      </a>
+      <a class="mini-card" href="https://public.tableau.com/app/profile/oluwabamiwo.aluko/viz/BritishAirwaysReview_17415095418820/RatingbyAircraft" target="_blank" rel="noopener">
+        <div class="mini-title">British Airways Review Analysis</div>
+        <span class="mini-when">Tableau</span>
+        <p class="mini-desc">Dashboard comparing average customer ratings by aircraft type against review volume, surfacing which aircraft are both well-rated and well-reviewed rather than just highest-scoring.</p>
+        <div class="mini-cta">View on Tableau Public →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="section-num">04</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>LANGUAGES</h3>
+        <div class="skill-list">Python · SQL</div>
+      </div>
+      <div class="skill-group">
+        <h3>ML / DEEP LEARNING</h3>
+        <div class="skill-list">PyTorch · YOLOv8 · ResNet · Grad-CAM++ · Model evaluation &amp; bias analysis</div>
+      </div>
+      <div class="skill-group">
+        <h3>DATA</h3>
+        <div class="skill-list">PostgreSQL · BigQuery · Pandas · Matplotlib · Seaborn</div>
+      </div>
+      <div class="skill-group">
+        <h3>TOOLS &amp; PLATFORMS</h3>
+        <div class="skill-list">Streamlit · Google Cloud Platform · Git</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk about data, ML, or where the two meet.</h2>
+    <div class="contact-links">
+      <a href="https://github.com/bamiwoaluko" target="_blank" rel="noopener">GitHub — github.com/bamiwoaluko</a>
+      <a href="https://www.linkedin.com/in/oluwabamiwo-aluko-b4618916b/" target="_blank" rel="noopener">LinkedIn — oluwabamiwo-aluko</a>
+    </div>
+    <p class="foot-note">Oluwabamiwo Aluko · Lagos, Nigeria</p>
+  </div>
+</footer>
+
+</body>
+</html>
